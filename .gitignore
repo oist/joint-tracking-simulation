@@ -7,8 +7,6 @@ make_joint_seeds.py
 main_parseed.py
 main_parag.py
 seeds.txt
-simulations1.sh
-simulations2.sh
 analyzer/__init__.py
 analyzer/ais_test.py
 analyzer/animate_single_trial.py
