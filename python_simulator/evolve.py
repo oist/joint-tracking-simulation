@@ -587,7 +587,8 @@ class JointEvolution:
                 slice_size = int(num_pairs/num_cores)
                 for slice_counter in range(slice_size):
                     pairs_slice = population[slice_counter*num_cores:(slice_counter+1)*num_cores]
-                    updated_slice = Parallel(n_jobs=num_cores, prefer="threads")(delayed(self.process_pair)
+                    # updated_slice = Parallel(n_jobs=num_cores, prefer="threads")(delayed(self.process_pair)
+                    updated_slice = Parallel(n_jobs=num_cores)(delayed(self.process_pair)
                                                                (pair, simulation_setup)
                                                                for pair in pairs_slice)
                     tested_pairs.extend(updated_slice)

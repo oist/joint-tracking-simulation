@@ -31,3 +31,4 @@ analyzer/test.py
 analyzer/trybrain.py
 analyzer/trypair.py
 .idea
+env
