@@ -30,3 +30,4 @@ analyzer/simulate_net.py
 analyzer/test.py
 analyzer/trybrain.py
 analyzer/trypair.py
+.idea
