@@ -1,3 +1,4 @@
 #!/bin/bash 
-python3 main_joint.py direct 989
-
+cd $HOME/oist_code/joint-tracking-simulation
+source ./env/bin/activate
+python main_joint.py direct 989
