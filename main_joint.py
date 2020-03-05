@@ -20,7 +20,7 @@ def main(agent_type, seed_num):
     json_data.close()
 
     # parent_dir = os.getcwd() + '/agents/joint/' + agent_type
-    parent_dir = "/work/FroeseU/katja/joint-tracking-data" + agent_type
+    parent_dir = "/work/FroeseU/katja/joint-tracking-data/" + agent_type
     if not os.path.exists(parent_dir):
         os.makedirs(parent_dir)
 
