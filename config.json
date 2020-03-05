@@ -1,0 +1,50 @@
+{
+  "evolution_params": {
+    "pop_size": 100,
+    "max_gens": 5,
+    "mutation_variance": 10,
+    "prob_crossover": 0.8,
+    "elitist_fraction": 0.05,
+    "fps_fraction": 0.8,
+    "fitness_update": "rank",
+    "selection": "sus",
+    "check_int": 25,
+    "evolution_break": 500,
+    "tested_proportion": 3,
+    "num_cores": 25
+  },
+  "network_params": {
+    "num_neurons": 8,
+    "step_size": 0.01,
+    "tau_range": [1, 100],
+    "theta_range": [-15, 15],
+    "w_range": [-15, 15],
+    "g_range": [1, 1]
+  },
+  "evaluation_params": {
+    "condition": "sound",
+    "velocities": [-2, -3, -4, 2, 3, 4],
+    "impacts": [1],
+    "tg_start_range": [0, 0],
+    "tg_start_variants": [0],
+    "screen_width": [-20, 20],
+    "start_period": 100,
+    "initial_state": [0, 0],
+    "n_turns": 3,
+    "velocity_control": "buttons",
+    "step_size": 0.01
+  },
+  "agent_params": {
+    "n_visual_sensors": 2,
+    "n_audio_sensors": 2,
+    "n_effectors": 2,
+    "n_visual_connections": 2,
+    "n_audio_connections": 2,
+    "n_effector_connections": 2,
+    "gene_range": [0, 1],
+    "evolvable_params": ["tau", "theta"],
+    "r_range": [-100, 100],
+    "e_range": [0, 10],
+    "max_visual_activation": 10
+  }
+}
