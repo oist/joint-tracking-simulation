@@ -19,3 +19,4 @@ network_analyzer/readFloatsFile.py
 network_analyzer/readIntsFile.py
 utils/convert_seeds.py
 utils/make_joint_seeds.py
+.env
