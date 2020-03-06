@@ -2,8 +2,9 @@
 This is the main file for running evolution of neural network agents in the Knoblich and Jordan (2003) task.
 This version does not parallelize the seeds and can be combined with parallel agent processing.
 """
+from dotenv import load_dotenv
 import random
-from python_simulator.evolve import JointEvolution
+from python_simulator.evolve import Evolution, JointEvolution
 # from cython_simulator.evolve import JointEvolution
 import json
 import argparse
@@ -13,14 +14,16 @@ import shutil
 # @profile(print_stats=10, dump_stats=True)
 
 
-def main(agent_type, seed_num):
+load_dotenv()
+
+
+def main(condition, agent_type, seed_num):
     # load configuration settings
     json_data = open('config.json')
     config = json.load(json_data)
     json_data.close()
 
-    # parent_dir = os.getcwd() + '/agents/joint/' + agent_type
-    parent_dir = "/work/FroeseU/katja/joint-tracking-data/" + agent_type
+    parent_dir = os.path.join(os.getenv("DATA_DIR"), condition, agent_type)
     if not os.path.exists(parent_dir):
         os.makedirs(parent_dir)
 
@@ -40,11 +43,18 @@ def main(agent_type, seed_num):
     #     config['evolution_params']['prob_crossover'] = prob_crossover
 
     # set up evolution
-    evolution = JointEvolution(config['evolution_params']['pop_size'],
-                               config['evolution_params'],
-                               config['network_params'],
-                               config['evaluation_params'],
-                               config['agent_params'])
+    if condition == "joint":
+        evolution = JointEvolution(config['evolution_params']['pop_size'],
+                                   config['evolution_params'],
+                                   config['network_params'],
+                                   config['evaluation_params'],
+                                   config['agent_params'])
+    else:  # condition == "single"
+        evolution = Evolution(config['evolution_params']['pop_size'],
+                              config['evolution_params'],
+                              config['network_params'],
+                              config['evaluation_params'],
+                              config['agent_params'])
 
     # create the right directory
     foldername = parent_dir + '/' + str(seed_num)
@@ -67,10 +77,24 @@ def main(agent_type, seed_num):
 if __name__ == '__main__':
     # run with  python simulate.py real > kennylog.txt
     parser = argparse.ArgumentParser()
+    parser.add_argument("condition", type=str, help="specify the experimental condition",
+                        choices=["joint", "single"])
     parser.add_argument("agent_type", type=str, help="specify the type of the agent you want to run",
                         choices=["buttons", "direct"])
     parser.add_argument("seed_num", type=int, help="specify random seed number")
     # parser.add_argument("-m", "--mutation_variance", type=int, default=1, help="specify the mutation variance")
     # parser.add_argument("-c", "--prob_crossover", type=int, default=0.8, help="specify the probability of crossover")
     args = parser.parse_args()
-    main(args.agent_type, args.seed_num)
+    main(args.condition, args.agent_type, args.seed_num)
+    # from random import randint
+    # print(randint(0, 9))
+
+#     # To parallelize the seeds instead of agents:
+#     parser.add_argument("seed_list", nargs='+', type=int)  # seed_num is a list
+#     procs = []
+#     for seed_num in args.seed_list:
+#         proc = Process(target=main, args=(args.agent_type, seed_num))
+#         procs.append(proc)
+#         proc.start()
+#     for proc in procs:
+#         proc.join()

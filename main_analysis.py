@@ -2,10 +2,14 @@ from analyzer import analyze as az
 import os
 import fnmatch
 import argparse
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 def main(condition, agent_type, pop_type, seed_num):
-    agent_directory = "agents/{}/{}/{}".format(condition, agent_type, seed_num)
+    agent_directory = os.path.join(os.getenv("DATA_DIR"), condition, agent_type, seed_num)
     gen_files = fnmatch.filter(os.listdir(agent_directory), 'gen*')
     gen_numbers = [int(x[3:]) for x in gen_files]
     last_gen = max(gen_numbers)
@@ -47,4 +51,3 @@ if __name__ == '__main__':
     parser.add_argument("seed_num", type=int, help="specify random seed number")
     args = parser.parse_args()
     main(args.condition, args.agent_type, args.pop_type, args.seed_num)
-
