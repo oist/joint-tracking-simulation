@@ -5,7 +5,7 @@ import argparse
 
 
 def main(condition, agent_type, pop_type, seed_num):
-    agent_directory = "Agents/{}/{}/{}".format(condition, agent_type, seed_num)
+    agent_directory = "agents/{}/{}/{}".format(condition, agent_type, seed_num)
     gen_files = fnmatch.filter(os.listdir(agent_directory), 'gen*')
     gen_numbers = [int(x[3:]) for x in gen_files]
     last_gen = max(gen_numbers)
