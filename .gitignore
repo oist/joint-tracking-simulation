@@ -5,7 +5,6 @@ agents
 docs
 paperfigs
 cython_simulator
-utils
 seeds.txt
 analyzer/__init__.py
 analyzer/crosscorr.py
@@ -18,3 +17,5 @@ network_analyzer/dyntest.py
 network_analyzer/infoplots.py
 network_analyzer/readFloatsFile.py
 network_analyzer/readIntsFile.py
+utils/convert_seeds.py
+utils/make_joint_seeds.py
