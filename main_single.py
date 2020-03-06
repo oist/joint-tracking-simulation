@@ -69,3 +69,13 @@ if __name__ == '__main__':
 
     # from random import randint
     # print(randint(0, 9))
+
+#     # To parallelize the seeds instead of agents:
+#     parser.add_argument("seed_list", nargs='+', type=int)  # seed_num is a list
+#     procs = []
+#     for seed_num in args.seed_list:
+#         proc = Process(target=main, args=(args.agent_type, seed_num))
+#         procs.append(proc)
+#         proc.start()
+#     for proc in procs:
+#         proc.join()
