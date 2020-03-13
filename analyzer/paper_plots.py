@@ -6,8 +6,8 @@ import pickle
 from scipy import signal
 from copy import deepcopy
 import seaborn as sns
-import idtxl.visualise_graph as vg
-import networkx as nx
+# import idtxl.visualise_graph as vg
+# import networkx as nx
 from ..analyzer import analyze as az
 from ..python_simulator import simulate
 
@@ -15,7 +15,7 @@ from ..python_simulator import simulate
 figure_directory = "paperfigs/"
 sns.set_style('ticks')
 
-agent_directory = "Agents/joint/direct/random/914463"
+agent_directory = "agents/joint/direct/914463"
 gen_files = fnmatch.filter(os.listdir(agent_directory), 'gen*')
 gen_numbers = [int(x[3:]) for x in gen_files]
 last_gen = max(gen_numbers)

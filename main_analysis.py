@@ -48,6 +48,6 @@ if __name__ == '__main__':
                         choices=["buttons", "direct"])
     parser.add_argument("pop_type", type=str, help="specify the type of population you want to run",
                         choices=["seeded", "random"])
-    parser.add_argument("seed_num", type=int, help="specify random seed number")
+    parser.add_argument("seed_num", type=str, help="specify random seed number")
     args = parser.parse_args()
     main(args.condition, args.agent_type, args.pop_type, args.seed_num)
