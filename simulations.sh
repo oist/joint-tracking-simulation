@@ -1,4 +1,5 @@
 #!/bin/bash
-cd $HOME/oist_code/joint-tracking-simulation
+module load python/3.7.3
+cd $HOME/joint-tracking-simulation
 source ./env/bin/activate
-python main_joint.py direct 989
+python main_joint.py joint direct 111
