@@ -6,16 +6,17 @@ import pickle
 from scipy import signal
 from copy import deepcopy
 import seaborn as sns
-import idtxl.visualise_graph as vg
-import networkx as nx
+# import idtxl.visualise_graph as vg
+# import networkx as nx
 from ..analyzer import analyze as az
 from ..python_simulator import simulate
 
+data_directory = "processed_data/"
 
 figure_directory = "paperfigs/"
 sns.set_style('ticks')
 
-agent_directory = "Agents/joint/direct/random/914463"
+agent_directory = "agents/joint/direct/914463"
 gen_files = fnmatch.filter(os.listdir(agent_directory), 'gen*')
 gen_numbers = [int(x[3:]) for x in gen_files]
 last_gen = max(gen_numbers)
@@ -796,10 +797,10 @@ fig.savefig(figure_directory + 'mi.eps')
 Network inference
 """
 
-center_res = pickle.load(open('results_all_trials_center_smallsample.p', 'rb'))
-pre_border_res = pickle.load(open('results_all_trials_pre_border_2rep.p', 'rb'))
-center_res21 = pickle.load(open('network_center_b2m1.p', 'rb'))
-pre_border_res21 = pickle.load(open('network_preborder_b2m1.p', 'rb'))
+center_res = pickle.load(open(data_directory + 'results_all_trials_center_smallsample.p', 'rb'))
+pre_border_res = pickle.load(open(data_directory + 'results_all_trials_pre_border_2rep.p', 'rb'))
+center_res21 = pickle.load(open(data_directory + 'network_center_b2m1.p', 'rb'))
+pre_border_res21 = pickle.load(open(data_directory + 'network_preborder_b2m1.p', 'rb'))
 
 graph1 = vg.generate_network_graph(center_res, n_nodes=7, fdr=True, find_u='max_te')
 graph2 = vg.generate_network_graph(pre_border_res, n_nodes=7, fdr=True, find_u='max_te')

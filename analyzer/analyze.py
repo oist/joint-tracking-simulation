@@ -9,6 +9,7 @@ import numpy as np
 import datetime
 import os
 from copy import deepcopy
+from scipy import signal
 # from images2gif import writeGif
 
 
@@ -93,6 +94,76 @@ def plot_data(trial_data, to_plot, fig_title, lims):
 
         plt.legend()
         plt.show()
+
+
+def resample_trials(trial_data):
+    num_trials = len(trial_data['target_pos'])
+    sampled_td = deepcopy(trial_data)
+
+    for trial_num in range(num_trials):
+        sampled_td['target_pos'][trial_num] = np.concatenate(
+            (trial_data['target_pos'][trial_num][:100],
+             signal.resample(trial_data['target_pos'][trial_num][100:], 3000)))
+        sampled_td['tracker_pos'][trial_num] = np.concatenate(
+            (trial_data['tracker_pos'][trial_num][:100],
+             signal.resample(trial_data['tracker_pos'][trial_num][100:], 3000)))
+        sampled_td['tracker_v'][trial_num] = np.concatenate(
+            (trial_data['tracker_v'][trial_num][:100],
+             signal.resample(trial_data['tracker_v'][trial_num][100:], 3000)))
+
+        sampled_td['brain_state_a1'][trial_num] = np.zeros((3100, 8))
+        sampled_td['derivatives_a1'][trial_num] = np.zeros((3100, 8))
+        sampled_td['input_a1'][trial_num] = np.zeros((3100, 8))
+        sampled_td['output_a1'][trial_num] = np.zeros((3100, 8))
+
+        sampled_td['brain_state_a2'][trial_num] = np.zeros((3100, 8))
+        sampled_td['derivatives_a2'][trial_num] = np.zeros((3100, 8))
+        sampled_td['input_a2'][trial_num] = np.zeros((3100, 8))
+        sampled_td['output_a2'][trial_num] = np.zeros((3100, 8))
+
+        sampled_td['keypress'][trial_num] = np.zeros((3100, 2))
+        sampled_td['button_state_a1'][trial_num] = np.zeros((3100, 2))
+        sampled_td['button_state_a2'][trial_num] = np.zeros((3100, 2))
+
+        for i in range(8):
+            sampled_td['brain_state_a1'][trial_num][:, i] = np.concatenate(
+                (trial_data['brain_state_a1'][trial_num][:100, i],
+                 signal.resample(trial_data['brain_state_a1'][trial_num][100:, i], 3000)))
+            sampled_td['derivatives_a1'][trial_num][:, i] = np.concatenate(
+                (trial_data['derivatives_a1'][trial_num][:100, i],
+                 signal.resample(trial_data['derivatives_a1'][trial_num][100:, i], 3000)))
+            sampled_td['input_a1'][trial_num][:, i] = np.concatenate(
+                (trial_data['input_a1'][trial_num][:100, i],
+                 signal.resample(trial_data['input_a1'][trial_num][100:, i], 3000)))
+            sampled_td['output_a1'][trial_num][:, i] = np.concatenate(
+                (trial_data['output_a1'][trial_num][:100, i],
+                 signal.resample(trial_data['output_a1'][trial_num][100:, i], 3000)))
+
+            sampled_td['brain_state_a2'][trial_num][:, i] = np.concatenate(
+                (trial_data['brain_state_a2'][trial_num][:100, i],
+                 signal.resample(trial_data['brain_state_a2'][trial_num][100:, i], 3000)))
+            sampled_td['derivatives_a2'][trial_num][:, i] = np.concatenate(
+                (trial_data['derivatives_a2'][trial_num][:100, i],
+                 signal.resample(trial_data['derivatives_a2'][trial_num][100:, i], 3000)))
+            sampled_td['input_a2'][trial_num][:, i] = np.concatenate(
+                (trial_data['input_a2'][trial_num][:100, i],
+                 signal.resample(trial_data['input_a2'][trial_num][100:, i], 3000)))
+            sampled_td['output_a2'][trial_num][:, i] = np.concatenate(
+                (trial_data['output_a2'][trial_num][:100, i],
+                 signal.resample(trial_data['output_a2'][trial_num][100:, i], 3000)))
+
+        for i in range(2):
+            sampled_td['keypress'][trial_num][:, i] = np.concatenate(
+                (trial_data['keypress'][trial_num][:100, i],
+                 signal.resample(trial_data['keypress'][trial_num][100:, i], 3000)))
+            sampled_td['button_state_a1'][trial_num][:, i] = np.concatenate(
+                (trial_data['button_state_a1'][trial_num][:100, i],
+                 signal.resample(trial_data['button_state_a1'][trial_num][100:, i], 3000)))
+            sampled_td['button_state_a2'][trial_num][:, i] = np.concatenate(
+                (trial_data['button_state_a2'][trial_num][:100, i],
+                 signal.resample(trial_data['button_state_a2'][trial_num][100:, i], 3000)))
+
+    return sampled_td
 
 
 def run_random_population(size, to_plot):
