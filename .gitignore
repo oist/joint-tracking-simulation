@@ -4,7 +4,8 @@ env
 agents
 docs
 paperfigs
-cython_simulator
+graphics
+processed_data
 seeds.txt
 analyzer/__init__.py
 analyzer/crosscorr.py

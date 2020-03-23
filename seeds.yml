@@ -1,0 +1,25 @@
+single:
+- 102575
+- 124898
+- 263601
+- 328651
+- 453756
+- 582744
+- 609357
+- 702897
+- 869076
+- 923819
+joint:
+- 176176
+- 205755
+- 914463
+- 240891
+- 392678
+- 424698
+- 513311
+- 628329
+- 717077
+- 812711
+
+# seedpop_v1 and populations_v1 - seed population from all best performing agents
+# seedpop and populations (in seeded folder) - seed population from best two-motor using agents
