@@ -1,8 +1,8 @@
 import sys, os
 sys.path.insert(0, os.path.abspath('..'))
 import pickle
-from python_simulator import simulate
-from python_simulator import evolve
+from cython_simulator import simulate
+from cython_simulator import evolve
 import matplotlib.pyplot as plt
 import json
 import numpy as np
