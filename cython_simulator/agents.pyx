@@ -2,7 +2,7 @@ import numpy as np
 cimport numpy as np
 import random
 import string
-from CTRNN cimport BrainCTRNN
+from .CTRNN cimport BrainCTRNN
 # from scipy.special import expit
 
 

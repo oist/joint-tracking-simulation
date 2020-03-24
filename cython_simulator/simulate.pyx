@@ -1,5 +1,5 @@
 import numpy as np
-from agents import sigmoid
+from .agents import sigmoid
 
 
 class Simulation:
